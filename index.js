@@ -24,7 +24,7 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('hello world'))
 
-app.post('./register', (req, res) => {
+app.post('/register', (req, res) => {
 
   const user = new User(req.body)
 
@@ -53,7 +53,7 @@ app.post('/login', (req, res) => {
       user.generateToken((err, user) => {
         if(err) return res.status(400).send(err)
 
-        res.cookie("x_auth" user.token)
+        res.cookie("x_auth", user.token)
           .status(200)
           .json({ 
             loginSuccess: true, 

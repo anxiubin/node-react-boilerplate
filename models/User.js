@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const { JsonWebTokenError } = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const saltRounds = 10
 
 const userSchema = mongoose.Schema({
@@ -54,7 +54,7 @@ userSchema.pre('save', function(next) {
 
 userSchema.methods.comparePassword = function(plainPassword, callback) {
   bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
-    if(err) return callback(err),
+    if(err) return callback(err)
       callback(null, isMatch)
   })
 }
