@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { registerUser } from '../../../_actions/user_actions'
 import { useDispatch } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -84,4 +85,4 @@ function RegisterPage(props) {
 	)
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage)

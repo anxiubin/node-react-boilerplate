@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -31,4 +32,4 @@ function LandingPage(props) {
 	)
 }
 
-export default LandingPage
+export default withRouter(LandingPage)

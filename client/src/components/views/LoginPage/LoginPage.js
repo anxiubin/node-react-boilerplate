@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { loginUser } from '../../../_actions/user_actions'
 import { useDispatch } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -64,4 +65,4 @@ function LoginPage(props) {
 	)
 }
 
-export default LoginPage
+export default withRouter(LoginPage)
