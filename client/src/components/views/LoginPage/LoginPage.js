@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { loginUser } from '../../../_actions/user_actions'
-import { useDispatch } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from "react"
+import styled from "styled-components"
+import { loginUser } from "../../../_actions/user_actions"
+import { useDispatch } from "react-redux"
+import { withRouter } from "react-router-dom"
 
 const Wrapper = styled.div`
 	display: flex;
@@ -17,7 +17,6 @@ const Form = styled.form`
 `
 
 function LoginPage(props) {
-
 	const dispatch = useDispatch()
 
 	const [Email, setEmail] = useState("")
@@ -26,7 +25,7 @@ function LoginPage(props) {
 	const onEmailHandler = (event) => {
 		setEmail(event.currentTarget.value)
 	}
-	
+
 	const onPasswordHandler = (event) => {
 		setPassword(event.currentTarget.value)
 	}
@@ -36,31 +35,28 @@ function LoginPage(props) {
 
 		let body = {
 			email: Email,
-			password: Password
+			password: Password,
 		}
 
-		dispatch(loginUser(body))
-			.then(res => {
-				if(res.payload.loginSuccess) {
-					props.history.push('/')
-				} else {
-					alert('Error')
-				}
-			})
+		dispatch(loginUser(body)).then((res) => {
+			if (res.payload.loginSuccess) {
+				props.history.push("/")
+			} else {
+				alert("Error")
+			}
+		})
 	}
 
 	return (
 		<Wrapper>
-				
 			<Form onSubmit={onSubmitHandler}>
-					<label>Email</label>
-					<input type="email" value={Email} onChange={onEmailHandler} />
-					<label>Password</label>
-					<input type="password" value={Password} onChange={onPasswordHandler} />
-					<br />
-					<button>Login</button>
+				<label>Email</label>
+				<input type="email" value={Email} onChange={onEmailHandler} />
+				<label>Password</label>
+				<input type="password" value={Password} onChange={onPasswordHandler} />
+				<br />
+				<button type="submit">Login</button>
 			</Form>
-				
 		</Wrapper>
 	)
 }

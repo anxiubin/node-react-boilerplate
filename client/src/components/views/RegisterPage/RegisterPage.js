@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { registerUser } from '../../../_actions/user_actions'
-import { useDispatch } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from "react"
+import styled from "styled-components"
+import { registerUser } from "../../../_actions/user_actions"
+import { useDispatch } from "react-redux"
+import { withRouter } from "react-router-dom"
 
 const Wrapper = styled.div`
 	display: flex;
@@ -17,7 +17,6 @@ const Form = styled.form`
 `
 
 function RegisterPage(props) {
-
 	const dispatch = useDispatch()
 
 	const [Email, setEmail] = useState("")
@@ -28,7 +27,7 @@ function RegisterPage(props) {
 	const onEmailHandler = (event) => {
 		setEmail(event.currentTarget.value)
 	}
-	
+
 	const onPasswordHandler = (event) => {
 		setPassword(event.currentTarget.value)
 	}
@@ -36,7 +35,7 @@ function RegisterPage(props) {
 	const onNameHandler = (event) => {
 		setName(event.currentTarget.value)
 	}
-	
+
 	const onConfirmPasswordHandler = (event) => {
 		setConfirmPassword(event.currentTarget.value)
 	}
@@ -45,42 +44,42 @@ function RegisterPage(props) {
 		event.preventDefault()
 
 		if (Password !== ConfirmPassword) {
-			return alert('비밀번호가 일치하지 않습니다.')
+			return alert("비밀번호가 일치하지 않습니다.")
 		}
 
 		let body = {
 			email: Email,
 			password: Password,
-			name: Name
+			name: Name,
 		}
 
-		dispatch(registerUser(body))
-			.then(res => {
-				console.log(res)
-				if(res.payload.success) {
-					props.history.push('/login')
-				} else {
-					alert('Error')
-				}
-			})
+		dispatch(registerUser(body)).then((res) => {
+			if (res.payload.success) {
+				props.history.push("/login")
+			} else {
+				alert("Error")
+			}
+		})
 	}
 
 	return (
 		<Wrapper>
-				
 			<Form onSubmit={onSubmitHandler}>
-					<label>Email</label>
-					<input type="email" value={Email} onChange={onEmailHandler} />
-					<label>Name</label>
-					<input type="text" value={Name} onChange={onNameHandler} />
-					<label>Password</label>
-					<input type="password" value={Password} onChange={onPasswordHandler} />
-					<label>Confirm Password</label>
-					<input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
-					<br />
-					<button>Register</button>
+				<label>Email</label>
+				<input type="email" value={Email} onChange={onEmailHandler} />
+				<label>Name</label>
+				<input type="text" value={Name} onChange={onNameHandler} />
+				<label>Password</label>
+				<input type="password" value={Password} onChange={onPasswordHandler} />
+				<label>Confirm Password</label>
+				<input
+					type="password"
+					value={ConfirmPassword}
+					onChange={onConfirmPasswordHandler}
+				/>
+				<br />
+				<button type="submit">Register</button>
 			</Form>
-				
 		</Wrapper>
 	)
 }
