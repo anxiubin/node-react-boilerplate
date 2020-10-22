@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { auth } from "../_actions/user_actions"
 
 export default function (SpecificComponent, option, adminRoute = null) {
@@ -12,11 +12,10 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
 	function AuthenticationCheck(props) {
 		const dispatch = useDispatch()
+		let user = useSelector((state) => state.user)
 
 		useEffect(() => {
 			dispatch(auth()).then((res) => {
-				console.log(res)
-
 				//로그인 하지 않은 상태
 				if (!res.payload.isAuth) {
 					if (option) {
@@ -24,6 +23,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
 					}
 				} else {
 					//로그인 한 상태
+
 					if (adminRoute && !res.payload.isAdmin) {
 						props.history.push("/")
 					} else {
@@ -33,7 +33,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
 			})
 		}, [])
 
-		return <SpecificComponent />
+		return <SpecificComponent {...props} user={user} />
 	}
 
 	return AuthenticationCheck
